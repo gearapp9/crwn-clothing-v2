@@ -2,7 +2,8 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./routes/home/home.component";
 import Navigation from "./routes/navigation/navigation.component";
 import Authentication from "./routes/authentication/authentication.component";
-import { UserProvider } from "./contexts/user.context";
+
+
 const App = () => {
   return (
       <Routes>
