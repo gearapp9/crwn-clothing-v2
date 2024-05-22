@@ -7,18 +7,17 @@ import {
   NavLinks,
   NavigationContainer,
 } from "./navigation.styles.jsx";
-import { UserContext } from "../../contexts/user.context";
+
 import { signOutUser } from "../../utils/firebase.util";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import { CartContext } from "../../contexts/cart.context";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../../store/user/user-selector.js";
 
 const Navigation = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-  const singOutHandler = async () => {
-    await signOutUser();
-    setCurrentUser(null);
-  };
+
+  const currentUser = useSelector(selectCurrentUser)
 
   const { cartIsVisible } = useContext(CartContext);
 
@@ -31,7 +30,7 @@ const Navigation = () => {
         <NavLinks>
           <NavLink to="/shop">Shop</NavLink>
           {currentUser ? (
-            <NavLink as="span" onClick={singOutHandler}>
+            <NavLink as="span" onClick={signOutUser}>
               Sign out
             </NavLink>
           ) : (
