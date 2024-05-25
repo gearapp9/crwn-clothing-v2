@@ -9,11 +9,15 @@ const categoriesSelectorMemo = createSelector(
 
 export const selectCategories = createSelector(
   [categoriesSelectorMemo],
-  (categories) => 
-   categories.reduce((acc, docSnapshot) => {
+  (categories) =>
+    categories.reduce((acc, docSnapshot) => {
       const { title, items } = docSnapshot;
       acc[title.toLowerCase()] = items;
       return acc;
     }, {})
-  
+);
+
+export const selectIsLoading = createSelector(
+  [categoriesSlice],
+  (categories) => categories.isLoading
 );
