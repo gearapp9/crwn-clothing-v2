@@ -8,8 +8,7 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
 const Shop = () => {
-
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getCategoriesData = async () => {
@@ -21,6 +20,7 @@ const Shop = () => {
   }, []);
 
   return (
+ 
     <Routes>
       <Route index element={<CategoriesPreview />} />
       <Route path=":category" element={<Category />} />

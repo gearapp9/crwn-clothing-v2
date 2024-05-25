@@ -16,7 +16,7 @@ const App = () => {
   const disptach = useDispatch();
 
   useEffect(() => {
-    console.log("redered");
+
     const unsubscribe = onAuthStateChangedListener((user) => {
       if (user) createUserDocFromAuth(user);
       disptach(setCurrentUser(user));
