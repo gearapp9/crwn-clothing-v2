@@ -8,8 +8,8 @@ import {
 import FormInput from "../form-input/form-input.component";
 import "./sign-in-form.styles.scss";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
-
-
+import { useDispatch } from "react-redux";
+import { emailSignin, googleSignin } from "../../store/user/user-actions";
 
 const defaultFormFields = {
   email: "",
@@ -19,7 +19,7 @@ const defaultFormFields = {
 const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
-  
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -32,15 +32,16 @@ const SignIn = () => {
   };
 
   const singInWithGoogle = async () => {
-     await signWithGoogle();
-    
+    //  await signWithGoogle();
+    dispatch(googleSignin());
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     try {
-     await singInAuthUserWithEmailAndPass(email, password);
+      //  await singInAuthUserWithEmailAndPass(email, password);
+      dispatch(emailSignin(email, password));
       resetFeilds();
     } catch (error) {
       alert("something went wrong");
@@ -70,7 +71,11 @@ const SignIn = () => {
         />
         <div className="buttons-container">
           <Button type="submit">Sign In</Button>
-          <Button type="button" buttonType={BUTTON_TYPE_CLASSES.google} onClick={singInWithGoogle}>
+          <Button
+            type="button"
+            buttonType={BUTTON_TYPE_CLASSES.google}
+            onClick={singInWithGoogle}
+          >
             Google Sign In
           </Button>
         </div>

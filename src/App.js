@@ -9,19 +9,21 @@ import { useDispatch } from "react-redux";
 import {
   createUserDocFromAuth,
   onAuthStateChangedListener,
+  getUser,
 } from "./utils/firebase.util";
-import { setCurrentUser } from "./store/user/user-actions";
+import { checkUser, setCurrentUser } from "./store/user/user-actions";
 
 const App = () => {
   const disptach = useDispatch();
 
   useEffect(() => {
-
-    const unsubscribe = onAuthStateChangedListener((user) => {
-      if (user) createUserDocFromAuth(user);
-      disptach(setCurrentUser(user));
-    });
-    return unsubscribe;
+    // const unsubscribe = onAuthStateChangedListener((user) => {
+    //   if (user) createUserDocFromAuth(user);
+    //   disptach(setCurrentUser(user));
+    // });
+    // return unsubscribe;
+    // getUser().then((data) => console.log("d",data));
+    disptach(checkUser())
   }, []);
 
   return (
