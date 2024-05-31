@@ -3,7 +3,7 @@ import CategoriesPreview from "../categories-preview/categories-preview.componen
 import "./shop.styles.scss";
 import Category from "../category/category.component";
 
-import { fatchCategoriesAsync } from "../../store/categories/categories-actions";
+import { fatchCategoriesStart } from "../../store/categories/categories-actions";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 
@@ -11,7 +11,7 @@ const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-      dispatch(fatchCategoriesAsync());
+      dispatch(fatchCategoriesStart());
   }, []);
 
   return (
