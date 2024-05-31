@@ -7,6 +7,9 @@ import FormInput from "../form-input/form-input.component";
 import "./sign-up-form.styles.scss";
 import Button from "../button/button.component";
 
+import { useDispatch } from "react-redux";
+import { signup } from "../../store/user/user-actions";
+
 const defaultFormFields = {
   displayName: "",
   email: "",
@@ -17,7 +20,7 @@ const defaultFormFields = {
 const SignUp = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPass } = formFields;
-
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -35,8 +38,9 @@ const SignUp = () => {
       alert("passwords not the same");
     }
     try {
-      const { user } = await createAuthUserWithEmailAndPass(email, password);
-      await createUserDocFromAuth(user, { displayName });
+      // const { user } = await createAuthUserWithEmailAndPass(email, password);
+      // await createUserDocFromAuth(user, { displayName });
+      dispatch(signup(email, password, displayName));
       resetFeilds();
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
