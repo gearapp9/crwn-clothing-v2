@@ -1,5 +1,5 @@
 import { createSelector } from "reselect";
-
+import {CategoryMap} from "./categories-types"
 const categoriesSlice = (state) => state.categories;
 
 const categoriesSelectorMemo = createSelector(
@@ -14,7 +14,7 @@ export const selectCategories = createSelector(
       const { title, items } = docSnapshot;
       acc[title.toLowerCase()] = items;
       return acc;
-    }, {})
+    }, {} as CategoryMap)
 );
 
 export const selectIsLoading = createSelector(
