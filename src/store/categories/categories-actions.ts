@@ -3,8 +3,8 @@ import {
   ActionWithPayload,
   createAction,
   Action,
+  withMatcher,
 } from "../../utils/reducer.util";
-import { getCategoriesAndDocument } from "../../utils/firebase.util";
 
 type FatchCategoriesStart =
   Action<CATEGORIES_ACTIONS_TYPES.SET_CATEGORIES_START>;
@@ -17,18 +17,17 @@ type FatchCategoriesFailed = ActionWithPayload<
   Error
 >;
 
-export type categoryActions =
-  | FatchCategoriesStart
-  | FatchCategoriesSuccess
-  | FatchCategoriesFailed;
+export const fatchCategoriesStart = withMatcher(
+  (): FatchCategoriesStart =>
+    createAction(CATEGORIES_ACTIONS_TYPES.SET_CATEGORIES_START)
+);
 
-export const fatchCategoriesStart = (): FatchCategoriesStart =>
-  createAction(CATEGORIES_ACTIONS_TYPES.SET_CATEGORIES_START);
+export const fatchCategoriesSuccess = withMatcher(
+  (categories: Category[]): FatchCategoriesSuccess =>
+    createAction(CATEGORIES_ACTIONS_TYPES.SET_CATEGORIES_SUCCESS, categories)
+);
 
-export const fatchCategoriesSuccess = (
-  categories: Category[]
-): FatchCategoriesSuccess =>
-  createAction(CATEGORIES_ACTIONS_TYPES.SET_CATEGORIES_SUCCESS, categories);
-
-export const fatchCategoriesFailed = (error: Error): FatchCategoriesFailed =>
-  createAction(CATEGORIES_ACTIONS_TYPES.SET_CATEGORIES_FAILED, error);
+export const fatchCategoriesFailed = withMatcher(
+  (error: Error): FatchCategoriesFailed =>
+    createAction(CATEGORIES_ACTIONS_TYPES.SET_CATEGORIES_FAILED, error)
+);
