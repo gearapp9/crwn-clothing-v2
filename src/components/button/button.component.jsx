@@ -15,7 +15,7 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
 
 const Button = ({ children, isLoading,buttonType, ...otherProps }) => {
   const CustomButton = getButton(buttonType);
-  return <CustomButton {...otherProps}>{isLoading ? <LoadingSpinner /> : children}</CustomButton>;
+  return <CustomButton disabled={isLoading} {...otherProps}>{isLoading ? <LoadingSpinner /> : children}</CustomButton>;
 };
 
 export default Button;
